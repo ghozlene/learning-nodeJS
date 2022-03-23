@@ -16,5 +16,8 @@
 	"bugs": {
 		"url": "https://github.com/ghozlene/learning-nodeJS/issues"
 	},
-	"homepage": "https://github.com/ghozlene/learning-nodeJS#readme"
+	"homepage": "https://github.com/ghozlene/learning-nodeJS#readme",
+	"devDependencies": {
+		"nodemon": "^2.0.15"
+	}
 }
