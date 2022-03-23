@@ -1,0 +1,20 @@
+{
+	"name": "nodejscourse",
+	"version": "1.0.0",
+	"description": "",
+	"main": "app.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node app.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ghozlene/learning-nodeJS.git"
+	},
+	"author": "Ghozlene Med Achref",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/ghozlene/learning-nodeJS/issues"
+	},
+	"homepage": "https://github.com/ghozlene/learning-nodeJS#readme"
+}
