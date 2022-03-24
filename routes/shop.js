@@ -10,7 +10,8 @@ router.get('/', (req, res, next) => {
 	console.log('shop.js: ', adminData.products);
 	// console.log('this is the second middleware');
 
-	res.sendFile(path.join(rootDir, 'views', 'shop.html'));
+	// res.sendFile(path.join(rootDir, 'views', 'shop.html'));
+	res.render('shop');
 });
 
 module.exports = router;
