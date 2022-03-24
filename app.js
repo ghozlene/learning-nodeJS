@@ -10,7 +10,7 @@ app.use('/', (req, res, next) => {
 	// console.log('this always RUN');
 	next();
 });
-app.use('/product', (req, res, next) => {
+app.post('/product', (req, res, next) => {
 	console.log(req.body);
 	res.redirect('/');
 });
