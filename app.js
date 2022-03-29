@@ -19,7 +19,6 @@ app.use(shopRoutes);
 
 app.use(errorController.failPage);
 
-mongoConnect((client) => {
-	console.log(client);
+mongoConnect(() => {
 	app.listen(3000);
 });
