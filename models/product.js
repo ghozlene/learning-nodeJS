@@ -7,27 +7,11 @@ module.exports = class Product {
 		this.description = description;
 		this.price = price;
 	}
-	save() {}
-
-	static deleteById(id, cb) {
-		getProductFromFile((products) => {
-			const product = products.find((p) => p.id === id);
-			const updatedProducts = products.filter((p) => p.id !== id);
-			fs.writeFile(p, JSON.stringify(updatedProducts), (err) => {
-				if (!err) {
-					Cart.deleteProduct(id, product.price);
-				}
-			});
-		});
-	}
-	static fetchAll(cb) {
-		getProductFromFile(cb);
-	}
-
-	static findById(id, cb) {
-		getProductFromFile((products) => {
-			const product = products.find((p) => p.id === id);
-			cb(product);
-		});
+	save() {
+		const db = getDb();
+		db.collection('products')
+			.insertOne(this)
+			.then((res) => console.log(res))
+			.catch((err) => console.log(err));
 	}
 };

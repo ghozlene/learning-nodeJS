@@ -17,14 +17,13 @@ const mongoConnect = (callback) => {
 			console.log(err);
 			throw err;
 		});
-	const getDb = () => {
-		if (_db) {
-			return _db;
-		} else {
-			throw 'no DB found sorry !';
-		}
-	};
 };
-
+const getDb = () => {
+	if (_db) {
+		return _db;
+	} else {
+		throw 'no DB found sorry !';
+	}
+};
 exports.mongoConnect = mongoConnect;
-exports.getDb = this.getDb;
+exports.getDb = getDb;
