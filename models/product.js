@@ -16,9 +16,9 @@ module.exports = class Product {
 				.collection('products')
 				.updateOne({ _id: new mongodb.ObjectId(this._id) }, { $set: this });
 		} else {
-			db.collection('products').insertOne(this);
+			dbOp = db.collection('products').insertOne(this);
 		}
-		return debOp
+		return dbOp
 			.then((res) => console.log(res))
 			.catch((err) => console.log(err));
 	}
