@@ -4,7 +4,22 @@ const express = require('express');
 
 const bodyParser = require('body-parser');
 const mongoConnect = require('./util/database').mongoConnect;
+const User = require('./models/user');
+
 const app = express();
+
+app.use((req, res, next) => {
+	User.findUserById('624446e7d4940efdea869e7a')
+		.then((user) => {
+			req.user = user;
+			next();
+		})
+		.catch((err) => {
+			console.log(err);
+			next();
+		});
+});
+
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
