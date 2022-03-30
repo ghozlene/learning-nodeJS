@@ -1,6 +1,4 @@
 const Product = require('../models/product');
-const mongodb = require('mongodb');
-const ObjectId = mongodb.ObjectId;
 
 exports.getAddProduct = (req, res, next) => {
 	res.render('admin/edit-product', {
@@ -55,7 +53,7 @@ exports.postEditProduct = (req, res, next) => {
 		updatedImageUrl,
 		updatedDescription,
 		updatedPrice,
-		new ObjectId(prodId)
+		prodId
 	);
 	updatedProduct
 		.save()
