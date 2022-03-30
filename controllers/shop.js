@@ -88,11 +88,16 @@ exports.postDeleteProduct = (req, res, next) => {
 		})
 		.catch((err) => console.log(err));
 };
-exports.getOrders = (req, res, next) => {
-	res.render('shop/orders', {
-		path: '/orders',
-		pageTitle: 'Your Orders',
-	});
+exports.postOrder = (req, res, next) => {
+	req.user
+		.addOrder()
+		.then(
+			res.render('shop/orders', {
+				path: '/orders',
+				pageTitle: 'Your Orders',
+			})
+		)
+		.catch((err) => console.log(err));
 };
 exports.getCheckout = (req, res, next) => {
 	res.render('shop/checkout', {
