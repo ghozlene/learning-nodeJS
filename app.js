@@ -1,9 +1,9 @@
 const path = require('path');
 
 const express = require('express');
-
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const mongoConnect = require('./util/database').mongoConnect;
+// const mongoConnect = require('./util/database').mongoConnect;
 const User = require('./models/user');
 
 const app = express();
@@ -33,6 +33,12 @@ app.use(shopRoutes);
 
 app.use(errorController.failPage);
 
-mongoConnect(() => {
-	app.listen(3000);
-});
+mongoose
+	.connect(
+		'mongodb+srv://achref:achref123@cluster0.cdhux.mongodb.net/project1?retryWrites=true&w=majority'
+	)
+	.then(() => {
+		console.log(' connect with mongoose');
+		app.listen(3000);
+	})
+	.catch((err) => console.log(err));
