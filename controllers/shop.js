@@ -22,6 +22,8 @@ exports.getProduct = (req, res, next) => {
 	// 		});
 	// 	});
 	// };
+
+	//! nothing change here because mongoose already have findById method not our method
 	Product.findById(prodId)
 		.then((product) => {
 			res.render('shop/product-detail', {
