@@ -8,16 +8,16 @@ const User = require('./models/user');
 
 const app = express();
 
-app.use((req, res, next) => {
-	User.findUserById('624446e7d4940efdea869e7a')
-		.then((user) => {
-			req.user = new User(user.username, user.email, user.cart, user._id);
-			next();
-		})
-		.catch((err) => {
-			console.log(err);
-		});
-});
+// app.use((req, res, next) => {
+// 	User.findUserById('624446e7d4940efdea869e7a')
+// 		.then((user) => {
+// 			req.user = new User(user.username, user.email, user.cart, user._id);
+// 			next();
+// 		})
+// 		.catch((err) => {
+// 			console.log(err);
+// 		});
+// });
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');

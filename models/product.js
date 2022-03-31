@@ -69,3 +69,5 @@ const productSchema = new Schema({
 // 			.catch((err) => console.log(err));
 // 	}
 // };
+
+module.exports = mongoose.model('Product', productSchema);
