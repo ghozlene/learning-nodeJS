@@ -8,16 +8,17 @@ const User = require('./models/user');
 
 const app = express();
 
-// app.use((req, res, next) => {
-// 	User.findUserById('624446e7d4940efdea869e7a')
-// 		.then((user) => {
-// 			req.user = new User(user.username, user.email, user.cart, user._id);
-// 			next();
-// 		})
-// 		.catch((err) => {
-// 			console.log(err);
-// 		});
-// });
+app.use((req, res, next) => {
+	User.findUserById('6246347dad1dc1349a59595c')
+
+		.then((user) => {
+			req.user = user;
+			next();
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+});
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -38,7 +39,18 @@ mongoose
 		'mongodb+srv://achref:achref123@cluster0.cdhux.mongodb.net/project1?retryWrites=true&w=majority'
 	)
 	.then(() => {
-		console.log(' connect with mongoose');
+		User.findOne().then((user) => {
+			if (!user) {
+				const user = new User({
+					name: 'ACHREF',
+					email: 'Achref@gmail.com',
+					cart: { items: [] },
+				});
+				user.save();
+				console.log(' connect with mongoose');
+			}
+		});
+
 		app.listen(3000);
 	})
 	.catch((err) => console.log(err));
