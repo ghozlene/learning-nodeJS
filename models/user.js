@@ -49,6 +49,11 @@ userShema.methods.deleteItemFromCart = function (productId) {
 	return this.save();
 };
 
+userShema.methods.clearCart = function () {
+	this.cart = { items: [] };
+	return this.save();
+};
+
 // userShema.methods.getCart=function(){
 
 // 		const productIds = this.cart.items.map((i) => {

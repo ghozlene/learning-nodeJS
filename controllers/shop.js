@@ -126,12 +126,13 @@ exports.postOrder = (req, res, next) => {
 			return order.save();
 		})
 
-		.then(
-			res.render('shop/orders', {
-				path: '/orders',
-				pageTitle: 'Your Orders',
-			})
-		)
+		.then((res) => {
+			return req.user.clearCart();
+		})
+		.then(() => {
+			res.redirect('/orders');
+		})
+
 		.catch((err) => console.log(err));
 };
 exports.getCheckout = (req, res, next) => {
