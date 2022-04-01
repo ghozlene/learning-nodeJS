@@ -9,7 +9,7 @@ const User = require('./models/user');
 const app = express();
 
 app.use((req, res, next) => {
-	User.findUserById('6246347dad1dc1349a59595c')
+	User.findById('6246347dad1dc1349a59595c')
 
 		.then((user) => {
 			req.user = user;
