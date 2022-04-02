@@ -7,8 +7,17 @@ const bodyParser = require('body-parser');
 const User = require('./models/user');
 
 const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
+
+const MONGODB_URI =
+	'mongodb+srv://achref:achref123@cluster0.cdhux.mongodb.net/project1?retryWrites=true&w=majority';
 
 const app = express();
+
+const store = new MongoDBStore({
+	uri: MONGODB_URI,
+	collection: 'sessions',
+});
 
 app.use((req, res, next) => {
 	User.findById('6246347dad1dc1349a59595c')
@@ -38,6 +47,7 @@ app.use(
 		secret: 'secretStringneedtobelong',
 		resave: false,
 		saveUninitialized: false,
+		store: store,
 	})
 );
 
@@ -48,9 +58,7 @@ app.use(authRoutes);
 app.use(errorController.failPage);
 
 mongoose
-	.connect(
-		'mongodb+srv://achref:achref123@cluster0.cdhux.mongodb.net/project1?retryWrites=true&w=majority'
-	)
+	.connect(MONGODB_URI)
 	.then(() => {
 		User.findOne().then((user) => {
 			if (!user) {
