@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 // const mongoConnect = require('./util/database').mongoConnect;
 const User = require('./models/user');
 
+const session = require('express-session');
+
 const app = express();
 
 app.use((req, res, next) => {
@@ -31,6 +33,14 @@ const errorController = require('./controllers/error');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(
+	session({
+		secret: 'secretStringneedtobelong',
+		resave: false,
+		saveUninitialized: false,
+	})
+);
+
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);
