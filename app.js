@@ -57,19 +57,7 @@ app.use(authRoutes);
 app.use(errorController.failPage);
 mongoose
 	.connect(MONGODB_URI)
-	.then(() => {
-		User.findOne().then((user) => {
-			if (!user) {
-				const user = new User({
-					name: 'ACHREF',
-					email: 'Achref@gmail.com',
-					cart: { items: [] },
-				});
-				user.save();
-				console.log(' connect with mongoose');
-			}
-		});
-
+	.then((res) => {
 		app.listen(3000);
 	})
 	.catch((err) => console.log(err));
