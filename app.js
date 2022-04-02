@@ -19,18 +19,6 @@ const store = new MongoDBStore({
 	collection: 'sessions',
 });
 
-app.use((req, res, next) => {
-	User.findById('6246347dad1dc1349a59595c')
-
-		.then((user) => {
-			req.user = user;
-			next();
-		})
-		.catch((err) => {
-			console.log(err);
-		});
-});
-
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
@@ -51,12 +39,22 @@ app.use(
 	})
 );
 
+app.use((req, res, next) => {
+	if (!req.session.user) {
+		return next();
+	}
+	User.findById(req.session.user._id)
+		.then((user) => {
+			req.user = user;
+			next();
+		})
+		.catch((err) => console.log(err));
+});
+
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);
-
 app.use(errorController.failPage);
-
 mongoose
 	.connect(MONGODB_URI)
 	.then(() => {

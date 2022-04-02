@@ -54,6 +54,7 @@ userShema.methods.clearCart = function () {
 	return this.save();
 };
 
+module.exports = mongoose.model('User', userShema);
 // userShema.methods.getCart=function(){
 
 // 		const productIds = this.cart.items.map((i) => {
@@ -73,8 +74,6 @@ userShema.methods.clearCart = function () {
 // 				});
 // 			});
 // 	}
-
-module.exports = mongoose.model('User', userShema);
 
 // const getDb = require('../util/database').getDb;
 // const mongodb = require('mongodb');
