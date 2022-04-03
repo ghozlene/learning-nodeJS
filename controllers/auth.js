@@ -1,5 +1,17 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+const nodemailer = require('nodemailer');
+const sendgridTransport = require('nodemailer-sendgrid-transport');
+
+const transporter = nodemailer.createTransport(
+	sendgridTransport({
+		auth: {
+			api_key:
+				'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',
+		},
+	})
+);
+
 exports.getLogin = (req, res, next) => {
 	// const isLoggedIn = req.get('Cookie').trim().split('=')[1] === 'true';
 	let message = req.flash('error');
@@ -74,10 +86,11 @@ exports.postSignup = (req, res, next) => {
 	const email = req.body.email;
 	const password = req.body.password;
 	const confirmPassword = req.body.confirmPassword;
+
 	User.findOne({ email: email }).then((userDoc) => {
 		if (userDoc) {
-			req.flash('error', 'Email already exists');
-			res.redirect('/signup');
+			req.flash('error', 'E-Mail exists already, please pick a different one.');
+			return res.redirect('/signup');
 		}
 		return bcrypt
 			.hash(password, 12)
@@ -91,7 +104,17 @@ exports.postSignup = (req, res, next) => {
 			})
 			.then((result) => {
 				res.redirect('/login');
+				return transporter
+					.sendMail({
+						to: email,
+						from: 'lordpain50959323@gmail.com',
+						subject: 'signUp succeeded',
+						html: '<h1 style="color:red;border:1px solid yellow;">You successfully signed up!</h1>',
+					})
+
+					.catch((err) => console.log(err));
 			})
+
 			.catch((err) => console.log(err));
 	});
 };
