@@ -20,10 +20,15 @@ exports.postAddProduct = (req, res, next) => {
 		price: price,
 		userId: req.user,
 	});
-	product.save().then((res) => {
-		console.log('product created');
-	});
-	res.redirect('/');
+	product
+		.save()
+		.then((res) => {
+			console.log('product created');
+			res.redirect('/admin/products');
+		})
+		.catch((err) => {
+			console.log(err);
+		});
 };
 
 exports.getEditProduct = (req, res, next) => {
